@@ -8,11 +8,7 @@ use App\Enums\AbsenceType;
 
 class CreateEventsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
@@ -21,16 +17,11 @@ class CreateEventsTable extends Migration
                 ->default(AbsenceType::dayOff);
             $table->date('day');
             $table->string('user_id');
-            $table->string('comment');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('events');
