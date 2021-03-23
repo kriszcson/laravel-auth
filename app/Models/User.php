@@ -21,4 +21,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller{
- public function register(Request $request)
+    public function register(Request $request)
     {
         return User::create([
             'name' => $request->input('name'),
