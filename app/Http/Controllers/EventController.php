@@ -16,9 +16,9 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $data=$request->validate([
-        'event_type'=>'required',
-        'day' =>'required',
-        'user_id'=>'required'
+            'event_type'=>'required',
+            'day' =>'required',
+            'user_id'=>'required'
         ]);
         return response(Event::create($data), 201);
     }
@@ -32,12 +32,10 @@ class EventController extends Controller
     {
         $data=$request->validate([
             'event_type'=>'required',
-            'day' =>'required',
+            'day'=>'required',
             'user_id'=>'required',
-            'comment'=>'required'
         ]);
-        $event->update($data);
-        return response($event, 201 );
+        return response($event->update($data), 200);
     }
 
     public function destroy(Event $event)
