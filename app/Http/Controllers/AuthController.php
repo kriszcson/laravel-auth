@@ -16,7 +16,7 @@ class AuthController extends Controller{
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'role_id'=> 2
+            'role_id'=> 2 //authorize as user
         ]);
         return $this->login($request);
     }
@@ -33,7 +33,7 @@ class AuthController extends Controller{
 
         $token = $user->createToken('token')->plainTextToken;
 
-        $cookie = cookie('jwt', $token, 60 * 24); // 1 day
+        $cookie = cookie('jwt', $token, 60*24); // 1 day
 
         return response([
             'message' => 'Success!'

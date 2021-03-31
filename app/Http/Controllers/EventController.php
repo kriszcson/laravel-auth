@@ -38,7 +38,7 @@ class EventController extends Controller
 
     public function update(Request $request, Event $event)
     { 
-        if ($request['user_id']!=NULL && $event['user_id'] != Auth::user()['id']
+        if (($request['user_id']!=NULL || $event['user_id'] != Auth::user()['id'])
             && Auth::user()['role_id']!=1){
             return response(['message'=>'No permission!'], 403);
         }
@@ -52,7 +52,8 @@ class EventController extends Controller
             return response($validate->errors(), 400);
         }
         $event->update($validate->validate());
-            return response($event, 201);
+
+        return response($event, 201);
     }
 
     public function destroy(Event $event)

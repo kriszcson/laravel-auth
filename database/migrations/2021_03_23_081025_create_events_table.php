@@ -14,9 +14,9 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('event_type')
-                ->default(AbsenceType::dayOff)->nullable();
+                ->default(AbsenceType::dayOff);
             $table->date('day');
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id');
             $table->string('comment')->nullable();
             $table->timestamps();
         });
