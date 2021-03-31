@@ -8,11 +8,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Validator;
 use App\Enums\UserRoleTypes;
 
 class AuthController extends Controller{
     public function register(Request $request)
     {
+        $validate=Validator::make($request->toArray(),[
+            'name'=>'required',
+            'email'=>'required|unique:users',
+            'password'=>'required|min:6',
+        ]);
+        if ($validate->fails()){
+            return response($validate->errors(), 400);
+        }
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),

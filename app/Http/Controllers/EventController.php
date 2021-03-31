@@ -20,6 +20,15 @@ class EventController extends Controller
         if ($request['user_id']!=NULL && $request['user_id'] != Auth::user()['id']
             && Auth::user()['role_id']!=1){
             return response(['message'=>'No permission!'], 403);
+        }     
+        $validate=Validator::make($request->toArray(),[
+            'day'=>'required',
+            'event_type'=>'required',
+            'comment'=>'nullable',
+            'user_id'=>'nullable'
+        ]);
+        if ($validate->fails()){
+            return response($validate->errors(), 400);
         }
             return response(Event::create([
                 'day' => $request->input('day'),
@@ -42,11 +51,11 @@ class EventController extends Controller
             && Auth::user()['role_id']!=1){
             return response(['message'=>'No permission!'], 403);
         }
-            $validate=Validator::make($request->toArray(),[
-                'day'=>'nullable',
-                'event_type'=>'nullable',
-                'comment'=>'nullable',
-                'user_id'=>'nullable'
+        $validate=Validator::make($request->toArray(),[
+            'day'=>'nullable',
+            'event_type'=>'nullable',
+            'comment'=>'nullable',
+            'user_id'=>'nullable'
         ]);
         if ($validate->fails()){
             return response($validate->errors(), 400);

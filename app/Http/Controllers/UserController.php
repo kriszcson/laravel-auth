@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Enums\UserRoleTypes;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
                 'password' => $request->input('password'),
                 'role_id'=> $request->input('role_id')!=NULL
                     ? $request->input('role_id')
-                    : 2,
+                    : UserRoleTypes::USER,
             ]), 201);
         } else {
             return response(['message'=>'No permission!'], 403);
