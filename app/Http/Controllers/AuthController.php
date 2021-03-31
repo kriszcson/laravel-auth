@@ -15,7 +15,8 @@ class AuthController extends Controller{
         User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password')
+            'password' => $request->input('password'),
+            'role_id'=> 2
         ]);
         return $this->login($request);
     }
