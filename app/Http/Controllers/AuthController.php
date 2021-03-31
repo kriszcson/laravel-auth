@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use App\Enums\UserRoleTypes;
 
 class AuthController extends Controller{
     public function register(Request $request)
@@ -16,7 +17,7 @@ class AuthController extends Controller{
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'role_id'=> 2 //authorize as user
+            'role_id'=> UserRoleTypes::USER
         ]);
         return $this->login($request);
     }
